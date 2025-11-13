@@ -1,0 +1,3 @@
+rent;greg;john;05.11.2023;3;5
+return;greg;john;12.11.2023;10.5;5
+return;dave;john;16.11.2023;22;3
