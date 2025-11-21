@@ -20,8 +20,6 @@ This application uses a client-server model designed to handle multiple users at
     * `books.txt`: Manages the book inventory, including title, price, and available copies.
     * `operations.txt`: A transaction log that records every "rent" and "return" action for statistical analysis.
 
-![Image: Login Window GUI](.media/login_GUI.png)
-
 ---
 
 ## ✨ Features & Functionality
@@ -30,6 +28,8 @@ This application uses a client-server model designed to handle multiple users at
 * Users are greeted with a login screen that sends credentials to the server.
 * The server validates the `username` and `password` against `users.txt`.
 * On success, the server returns the user's `role`, and the client application dynamically loads the appropriate dashboard (Librarian or Manager).
+
+![Image: Login Window GUI](.media/login_GUI.png)
 
 ### 2. Librarian Panel
 * **Rent Books:** Librarians can select one or more books, enter a client's name and date, and submit a "rent" request.
