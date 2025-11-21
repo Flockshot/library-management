@@ -16,13 +16,11 @@ This application uses a client-server model designed to handle multiple users at
 * **Server (`server.py`):** A multithreaded TCP server. It listens for incoming connections and spawns a new, dedicated thread for each client. This allows multiple librarians and managers to be connected and performing operations simultaneously. The server is responsible for all business logic, data validation, and file I/O.
 * **Client (`client.py`):** A Tkinter-based GUI application that serves as the user-facing terminal. It connects to the server via TCP and provides a role-specific dashboard based on user authentication.
 * **Data Persistence:** The system uses three flat files as its database:
-    * `users.txt`: Stores user credentials and roles (librarian/manager).
-    * `books.txt`: Manages the book inventory, including title, price, and available copies.
-    * `operations.txt`: A transaction log that records every "rent" and "return" action for statistical analysis.
+    * `users.txt`: Stores user credentials and roles (librarian/manager).
+    * `books.txt`: Manages the book inventory, including title, price, and available copies.
+    * `operations.txt`: A transaction log that records every "rent" and "return" action for statistical analysis.
 
-> **[Image: Login Window from library-management.pdf]**
->
-> *(**Developer Note:** Place the screenshot of the Login Window from **Page 3 of `library-management.pdf`**  here.)*
+![Image: Login Window GUI](.media/login_GUI.png)
 
 ---
 
@@ -36,28 +34,24 @@ This application uses a client-server model designed to handle multiple users at
 ### 2. Librarian Panel
 * **Rent Books:** Librarians can select one or more books, enter a client's name and date, and submit a "rent" request.
 * **Server-Side Validation (Rent):** The server enforces business rules:
-    1.  **Availability Check:** Rejects the rental if any selected book has 0 copies available in `books.txt`.
-    2.  **Outstanding Rentals Check:** Rejects the rental if the client has previously rented books that have not yet been returned (by checking `operations.txt`).
+    1.  **Availability Check:** Rejects the rental if any selected book has 0 copies available in `books.txt`.
+    2.  **Outstanding Rentals Check:** Rejects the rental if the client has previously rented books that have not yet been returned (by checking `operations.txt`).
 * **Return Books:** Librarians can select books, enter the client's name and date, and submit a "return" request.
 * **Server-Side Validation (Return):** The server checks `operations.txt` to ensure the books were actually rented by that client and not already returned.
 * **File Updates:** On a successful operation, the server updates `books.txt` (decrementing/incrementing `copiesAvailable`) and appends the transaction to `operations.txt`.
 
-> **[Image: Librarian Panel GUI from library-management.pdf]**
->
-> *(**Developer Note:** Place the screenshot of the Librarian Panel from **Page 3 of `library-management.pdf`**  here.)*
+![Image: Librarian Panel GUI](.media/librarian_GUI.png)
 
 ### 3. Manager Panel
 * **Generate Reports:** Managers can request 4 different statistical reports.
 * The server computes these metrics on the fly from `operations.txt` and sends back the result to be displayed in a message box.
 * **Available Reports:**
-    1.  Most rented book(s) overall.
-    2.  Librarian(s) with the highest number of operations.
-    3.  Total generated revenue by the library.
-    4.  Average rental period for "Harry Potter".
+    1.  Most rented book(s) overall.
+    2.  Librarian(s) with the highest number of operations.
+    3.  Total generated revenue by the library.
+    4.  Average rental period for "Harry Potter".
 
-> **[Image: Manager Panel GUI from library-management.pdf]**
->
-> *(**Developer Note:** Place the screenshot of the Manager Panel from **Page 4 of `library-management.pdf`**  here.)*
+![Image: Manager Panel GUI](.media/manager_GUI.png)
 
 ### 4. Thread-Safe Synchronization
 * To prevent data corruption from multiple librarians accessing the files simultaneously, the server uses **`threading.RLock`**.
